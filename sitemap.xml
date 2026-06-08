@@ -151,11 +151,6 @@
 <priority>0.64</priority>
 </url>
   <url>
-    <loc>https://kalyanjewellerymachines.com/blog-details19.html</loc>
-    <lastmod>2026-06-08</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://kalyanjewellerymachines.com/blog-details18.html</loc>
     <lastmod>2026-06-08</lastmod>
     <priority>0.8</priority>
@@ -187,6 +182,11 @@
   </url>
   <url>
     <loc>https://kalyanjewellerymachines.com/blog-details13.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kalyanjewellerymachines.com/blog-details19.html</loc>
     <lastmod>2026-06-08</lastmod>
     <priority>0.8</priority>
   </url>

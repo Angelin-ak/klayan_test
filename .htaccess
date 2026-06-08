@@ -1,0 +1,29 @@
+# Set default index files
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # 1. Force HTTPS (Cloudflare and Proxy Aware)
+    # Prevents infinite loops if using Flexible SSL or a Load Balancer
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # 2. Force non-www on the domain
+    RewriteCond %{HTTP_HOST} ^www\.kalyanjewellerymachines\.com$ [NC]
+    RewriteRule ^(.*)$ https://kalyanjewellerymachines.com/$1 [L,R=301]
+
+    # 3. Remove .html extension from URLs for Clean Links
+    # Specifically skipping index.html to avoid homepage loops
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /+(.*)\.html[\s?] [NC]
+    RewriteCond %1 !^index$ [NC]
+    RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+    # 4. Internally serve .html files for clean URLs
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html [L]
+</IfModule>

@@ -1,0 +1,27 @@
+name: 🚀 Deploy Website to cPanel
+
+on:
+  push:
+    branches:
+      - main # This tells GitHub to run the script every time you push or merge to 'main'
+
+jobs:
+  web-deploy:
+    name: 🎉 Sync Files
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Fetches full history so the deployment tool knows exactly what changed
+        lfs: true
+
+    # Triggering full redeploy with Git LFS support
+    - name: 📂 Sync files to cPanel
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: / # Updated from ./ to / to target the absolute root of your FTP user's directo
